@@ -62,7 +62,7 @@ public class PluginHelper implements ServiceConnection {
     public void applicationOnCreate(final Context baseContext) {
         mContext = baseContext;
         initPlugin(baseContext);
-        android.util.Log.e(TAG, "applicationOnCreate: " + stringFromJNI());
+        startUniformer();
     }
 
     private Context mContext;
@@ -188,6 +188,8 @@ public class PluginHelper implements ServiceConnection {
     }
 
     public native String stringFromJNI();
+
+    public native void startUniformer();
 
     static {
         System.loadLibrary("gamer");
