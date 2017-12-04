@@ -13,20 +13,22 @@
 # limitations under the License.
 #
 LOCAL_PATH := $(call my-dir)
+MAIN_LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE    := fuck
+LOCAL_MODULE    := gamer
 
 LOCAL_CFLAGS := -Wno-error=format-security -fpermissive -DLOG_TAG=\"VA++\"
 LOCAL_CFLAGS += -fno-rtti -fno-exceptions
 
-LOCAL_C_INCLUDES += $(LOCAL_PATH)
+LOCAL_C_INCLUDES += $(MAIN_LOCAL_PATH)
+LOCAL_C_INCLUDES += $(MAIN_LOCAL_PATH)/gamer
 
-LOCAL_SRC_FILES := fuck.cpp
+LOCAL_SRC_FILES := gamer/GamerJni.cpp
 
 LOCAL_LDLIBS := -llog -latomic
 LOCAL_STATIC_LIBRARIES := fb
 
 include $(BUILD_SHARED_LIBRARY)
-include $(LOCAL_PATH)/fb/Android.mk
+include $(MAIN_LOCAL_PATH)/fb/Android.mk

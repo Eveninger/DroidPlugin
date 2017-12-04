@@ -190,6 +190,6 @@ public class PluginHelper implements ServiceConnection {
     public native String stringFromJNI();
 
     static {
-        System.loadLibrary("fuck");
+        System.loadLibrary("gamer");
     }
 }
