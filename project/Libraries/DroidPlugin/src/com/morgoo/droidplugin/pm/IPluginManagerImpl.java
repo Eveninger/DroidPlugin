@@ -846,9 +846,9 @@ public class IPluginManagerImpl extends IPluginManager.Stub {
                         } catch (NameNotFoundException e) {
                         }
                         if (!mHostRequestedPermission.contains(requestedPermission) && b) {
-                            Log.e(TAG, "No Permission %s", requestedPermission);
-                            new File(apkfile).delete();
-                            return PluginManager.INSTALL_FAILED_NO_REQUESTEDPERMISSION;
+                            Log.e(TAG, "No Permission " + requestedPermission);
+//                            new File(apkfile).delete();
+//                            return PluginManager.INSTALL_FAILED_NO_REQUESTEDPERMISSION;
                         }
                     }
                 }
@@ -887,8 +887,8 @@ public class IPluginManagerImpl extends IPluginManager.Stub {
                             }
                             if (!mHostRequestedPermission.contains(requestedPermission) && b) {
                                 Log.e(TAG, "No Permission %s", requestedPermission);
-                                new File(apkfile).delete();
-                                return PluginManager.INSTALL_FAILED_NO_REQUESTEDPERMISSION;
+//                                new File(apkfile).delete();
+//                                return PluginManager.INSTALL_FAILED_NO_REQUESTEDPERMISSION;
                             }
                         }
                     }

@@ -5,7 +5,7 @@
 #ifndef NDK_LOG_H
 #define NDK_LOG_H
 
-#include <fb/fbjni.h>
+#include <fb/include/fb/fbjni.h>
 
 #define NATIVE_METHOD(func_ptr, func_name, signature) { func_name, signature, reinterpret_cast<void*>(func_ptr) }
 

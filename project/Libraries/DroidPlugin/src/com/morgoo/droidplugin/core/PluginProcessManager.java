@@ -199,6 +199,7 @@ public class PluginProcessManager {
                     String optimizedDirectory = PluginDirHelper.getPluginDalvikCacheDir(hostContext, pluginInfo.packageName);
                     String libraryPath = PluginDirHelper.getPluginNativeLibraryDir(hostContext, pluginInfo.packageName);
                     String apk = pluginInfo.applicationInfo.publicSourceDir;
+                    android.util.Log.e(TAG, "preLoadApk: 我是在哪出现的？");
                     if (TextUtils.isEmpty(apk)) {
                         pluginInfo.applicationInfo.publicSourceDir = PluginDirHelper.getPluginApkFile(hostContext, pluginInfo.packageName);
                         apk = pluginInfo.applicationInfo.publicSourceDir;

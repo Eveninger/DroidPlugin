@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ApiTest"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.example.ApiTest"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -15,6 +16,9 @@
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE"
+                     tools:ignore="ProtectedPermissions"/>
 
     <application
         android:icon="@drawable/ic_launcher"

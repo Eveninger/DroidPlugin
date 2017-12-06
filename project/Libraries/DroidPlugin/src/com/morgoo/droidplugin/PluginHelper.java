@@ -25,6 +25,7 @@ package com.morgoo.droidplugin;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
@@ -36,8 +37,10 @@ import com.morgoo.droidplugin.reflect.FieldUtils;
 import com.morgoo.droidplugin.reflect.MethodUtils;
 import com.morgoo.helper.Log;
 import com.morgoo.helper.compat.ActivityThreadCompat;
+import com.morgoo.va.NativeMethods;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
 /**
@@ -48,6 +51,14 @@ public class PluginHelper implements ServiceConnection {
     private static final String TAG = PluginHelper.class.getSimpleName();
 
     private static PluginHelper sInstance = null;
+
+    static {
+        System.loadLibrary("gamer");
+    }
+
+    static {
+        NativeMethods.init();
+    }
 
     private PluginHelper() {
     }
@@ -62,7 +73,22 @@ public class PluginHelper implements ServiceConnection {
     public void applicationOnCreate(final Context baseContext) {
         mContext = baseContext;
         initPlugin(baseContext);
-        startUniformer();
+//        startUniformer(Build.VERSION.SDK_INT);
+//        launchEngine(baseContext);
+    }
+
+    private static void launchEngine(Context context) {
+        Method[] methods = {NativeMethods.gOpenDexFileNative, NativeMethods.gCameraNativeSetup, NativeMethods.gAudioRecordNativeCheckPermission};
+        String hostPkgName = context.getApplicationInfo().packageName;
+        boolean isArt = System.getProperty("java.vm.version").startsWith("2");
+        nativeLaunchEngine(methods, hostPkgName, isArt, Build.VERSION.SDK_INT, NativeMethods.gCameraMethodType);
+    }
+
+    public static int onGetCallingUid(int originUid) {
+        return 10001;
+    }
+
+    public static void onOpenDexFileNative(String[] params) {
     }
 
     private Context mContext;
@@ -187,11 +213,19 @@ public class PluginHelper implements ServiceConnection {
         MyCrashHandler.getInstance().register(baseContext);
     }
 
-    public native String stringFromJNI();
+    private static native void nativeLaunchEngine(Object[] method, String hostPackageName, boolean isArt, int apiLevel, int cameraMethodType);
 
-    public native void startUniformer();
+    private static native void nativeMark();
 
-    static {
-        System.loadLibrary("gamer");
-    }
+    private static native String nativeReverseRedirectedPath(String redirectedPath);
+
+    private static native String nativeGetRedirectedPath(String orgPath);
+
+    private static native void nativeIORedirect(String origPath, String newPath);
+
+    private static native void nativeIOWhitelist(String path);
+
+    private static native void nativeIOForbid(String path);
+
+    private static native void nativeEnableIORedirect(String selfSoPath, int apiLevel, int previewApiLevel);
 }

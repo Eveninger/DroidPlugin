@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <elf.h>
-#include "Helper.h"
+#include <Jni/Helper.h>
 #include <malloc.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <sys/mman.h>
-#include <fb/ALog.h>
+#include <fb/include/fb/ALog.h>
 #include "SymbolFinder.h"
 
 /* memory map for libraries */
